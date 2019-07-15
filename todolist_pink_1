@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>Introducing Events</title>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous">  
+</script>
+
+
+<style>
+	div{
+		
+		float:left;
+		margin:10px;
+
+	}
+
+	
+	</style>
+
+
+
+<script>
+$(document).ready(function() {
+	$('form').submit(function(evt){
+		evt.preventDefault();
+	}); // end submit
+	$('#addButton').click(function() {
+		var dfield = $('#date')   //選取date並存入dfield
+		var tfield = $('#things')
+		var dfieldVal = dfield.val();
+		var tfieldVal = tfield.val();
+		
+		if (dfieldVal&&tfieldVal) { 
+			$('#tasklist').append('<p>' +'<input type="checkbox" class="check" value="0" >'+
+			   tfieldVal + ' at ' + dfieldVal + ' ' +
+			  '<input type="submit" class="delete" value="Delete">'  +'</p>');
+
+			                    
+			dfield.val('');   
+			dfield.focus();   //滑鼠回到date
+			tfield.val('');   
+			tfield.focus();
+		
+		}
+		
+		
+	})// end #addButton click
+
+
+
+	/*$('#tasklist').on('click', '.edit', function(){
+    $(this).prev().attr('contenteditable','true');
+    $(this).prev().focus();
+	
+			  '<input type="submit" class="edit" value="Edit">' +
+});*/
+
+$('#tasklist').on('click', '.delete',function(){
+    $(this).parent().remove();
+	
+});
+
+
+
+$('#tasklist').on('click','.check',function() { //改成CHECKED
+		
+		if($(this).prop('checked',true))
+		{
+			$(this).parent().css({
+				'text-decoration' : 'line-through',
+				'font-weight' : 'bold',
+				'color' : 'lightgrey'
+			});
+			$('#finish').append('<li>'+ $(this).parent().text()+'</li>');
+
+		}
+		else
+		{
+			$(this).parent().css({
+				'text-decoration' : 'none',
+				'font-weight' : 'normal',
+				'color' : 'black'
+			});
+		}
+
+	
+});		
+	/*$('#tasklist').on('click','li',function() { //改成CHECKED
+		$(this).css({
+			'text-decoration' : 'line-through',
+			'font-weight' : 'bold',
+			'color' : 'lightgrey'
+		}); // end css
+	}); // end on */
+
+
+	
+	
+});
+</script>
+</head>
+
+<body id="events" style="background-color: #FFE4E1 ;width:1000px;margin:0 auto;">
+<div class="wrapper"></body>
+	
+	<div class="main" style="background-color:white;width:700px"; >
+				<form action="#" method="get">
+					<h1 style="text-align:center">BOSS BABE TO DO LIST</h1>
+					<p>
+						<label>Date</label>
+						<input name="date" type="date" id="date">
+					</p>
+				</form>
+
+	</div>
+
+
+			
+	
+		<div class="content" style="clear:left";>
+			<div style="background-color:white;width:340px";>
+				
+				<form action="#" method="get">
+					<h5>TODAY I AM GRATEFUL:</h5>
+					<textarea rows=3 cols=40></textarea>
+					
+				</form>	
+			</div>
+
+			<div style="background-color:white;width:340px";>
+				
+				<form action="#" method="get">
+					<h5>BUSINESS TO DO:</h5>
+					<textarea rows=3 cols=40></textarea>
+					
+				</form>	
+				</div>
+
+
+
+
+
+
+			<div id="tasklist" style="background-color:white;width:340px;height:500px; clear:left";>
+				
+				
+				
+				<form action="#" method="get">
+					<h5>TODO:</h5>
+					
+						
+
+						<input name="things" type="text" id="things">
+						
+						<input name="Button" type="button" id="addButton" value="+">
+						<br>
+						<br>
+						
+				    
+					
+				</form>
+			
+			
+			
+
+			
+			</div>
+			
+			<div style="background-color:white;width:340px;height:300px";>
+					
+				<form action="#" method="get">
+					<h5>NOTES:</h5>
+					<textarea rows=3 cols=40></textarea>
+						
+				</form>	
+			</div>
+
+
+			
+			<div style="background-color:white;width:340px;height:200px";>
+					
+				<form action="#" method="get">
+					<h5>CELEBRATIONS:</h5>
+					<textarea rows=3 cols=40></textarea>
+						
+				</form>	
+			</div>
+			
+		
+		</div>
+	</div>
+	
+</div>
+</body>
+</html>
